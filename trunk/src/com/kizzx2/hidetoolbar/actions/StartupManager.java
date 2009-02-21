@@ -4,11 +4,10 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.IStartup;
 import org.eclipse.ui.IWorkbenchWindow;
 
+import org.eclipse.swt.custom.CBanner;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Canvas;
 
 public class StartupManager implements IStartup
 {
@@ -26,13 +25,8 @@ public class StartupManager implements IStartup
 				Control[] children = mainShell.getChildren();
 				
 				for ( Control child : children )
-				{
-					if ( child.isDisposed() || !child.isVisible() ) continue;
-					if ( child.getClass().equals ( Canvas.class ) ) continue;
-					if ( child.getClass().equals ( Composite.class ) ) continue;
-					
-					child.setVisible ( false );
-				}
+					if ( child.getClass().equals ( CBanner.class ) )
+						child.setVisible ( false );
 				
 				mainShell.layout();
 			}
